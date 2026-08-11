@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Konversi Berat | GiziHemat</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+        rel="stylesheet"
+    >
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-5">
+
+            <div class="h-20 flex items-center justify-between">
+
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3">
+
+                    <div class="w-11 h-11 rounded-xl bg-blue-600 text-white
+                                flex items-center justify-center">
+
+                        <span class="material-symbols-outlined">
+                            calculate
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h1 class="font-bold text-lg text-slate-800">
+                            GiziHitung
+                        </h1>
+
+                        <p class="text-xs text-slate-500">
+                            Pilih bahan pangan dengan lebih mudah
+                        </p>
+
+                    </div>
+
+                </a>
+
+                <!-- Menu -->
+                <div class="hidden md:flex items-center gap-7 text-sm">
+
+                    <a href="index.html"
+                       class="text-slate-600 hover:text-blue-600">
+
+                        Beranda
+
+                    </a>
+
+                    <a href="petunjuk.html"
+                       class="text-slate-600 hover:text-blue-600">
+
+                        Petunjuk Penggunaan
+
+                    </a>
+
+                    <a href="konversi-berat.html"
+                       class="font-semibold text-blue-600">
+
+                        Konversi Berat
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- HEADER -->
+    <section class="bg-gradient-to-br from-blue-600 to-blue-800
+                    text-white py-16">
+
+        <div class="max-w-5xl mx-auto px-5 text-center">
+
+            <div class="w-16 h-16 mx-auto mb-5
+                        bg-white/15 rounded-2xl
+                        flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-4xl">
+                    scale
+                </span>
+
+            </div>
+
+            <h2 class="text-3xl md:text-4xl font-bold">
+
+                Konversi Ukuran Rumah Tangga
+
+            </h2>
+
+            <p class="max-w-2xl mx-auto mt-4
+                      text-blue-100 leading-relaxed">
+
+                Gunakan panduan ini untuk mengetahui perkiraan berat
+                bahan pangan berdasarkan ukuran rumah tangga, seperti
+                satu butir, satu potong, satu buah, atau satu gelas.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ISI -->
+    <main class="max-w-5xl mx-auto px-5 py-12">
+
+        <!-- Informasi -->
+        <div class="bg-blue-50 border border-blue-100
+                    rounded-2xl p-5 mb-8">
+
+            <div class="flex gap-4">
+
+                <span class="material-symbols-outlined
+                             text-blue-600 text-3xl">
+
+                    info
+
+                </span>
+
+                <div>
+
+                    <h3 class="font-semibold text-blue-900">
+
+                        Perhatikan
+
+                    </h3>
+
+                    <p class="text-sm text-blue-800 mt-1 leading-relaxed">
+
+                        Berat yang ditampilkan merupakan perkiraan.
+                        Berat aktual dapat berbeda berdasarkan ukuran,
+                        jenis, bentuk, dan kondisi bahan pangan.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Judul -->
+        <div class="text-center mb-7">
+
+            <h2 class="text-2xl font-bold">
+
+                Cari Bahan Pangan
+
+            </h2>
+
+            <p class="text-slate-500 mt-2">
+
+                Ketik nama bahan pangan untuk melihat perkiraan beratnya.
+
+            </p>
+
+        </div>
+
+
+        <!-- Kolom Pencarian -->
+        <div class="relative max-w-2xl mx-auto mb-8">
+
+            <span class="material-symbols-outlined
+                         absolute left-5 top-1/2
+                         -translate-y-1/2
+                         text-slate-400">
+
+                search
+
+            </span>
+
+            <input
+                type="text"
+                id="cariBahan"
+                placeholder="Contoh: telur, tahu, nasi, ayam..."
+                class="w-full py-4 pl-14 pr-5
+                       rounded-2xl border border-slate-200
+                       bg-white shadow-sm
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-4
+                       focus:ring-blue-100"
+            >
+
+        </div>
+
+
+        <!-- Tabel -->
+        <div class="bg-white rounded-2xl
+                    border border-slate-200
+                    shadow-sm overflow-hidden">
+
+            <div class="overflow-x-auto">
+
+                <table class="w-full" id="tabelKonversi">
+
+                    <thead>
+
+                        <tr class="bg-slate-100
+                                   text-left text-sm">
+
+                            <th class="px-6 py-5">
+
+                                Bahan Pangan
+
+                            </th>
+
+                            <th class="px-6 py-5">
+
+                                Ukuran Rumah Tangga
+
+                            </th>
+
+                            <th class="px-6 py-5 text-center">
+
+                                Perkiraan Berat
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody class="divide-y divide-slate-100">
+
+                        <!-- TAHU -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+
+                                Tahu
+
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+
+                                1 biji besar
+
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100
+                                             text-blue-700
+                                             font-semibold
+                                             px-4 py-2
+                                             rounded-full">
+
+                                    100 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- TELUR BEBEK -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+
+                                Telur bebek
+
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+
+                                1 butir
+
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100
+                                             text-blue-700
+                                             font-semibold
+                                             px-4 py-2
+                                             rounded-full">
+
+                                    60 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- TELUR AYAM KAMPUNG -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+
+                                Telur ayam kampung
+
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+
+                                1 butir
+
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100
+                                             text-blue-700
+                                             font-semibold
+                                             px-4 py-2
+                                             rounded-full">
+
+                                    37,5 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- TELUR AYAM RAS-->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+
+                                Telur ayam ras
+
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+
+                                1 butir
+
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100
+                                             text-blue-700
+                                             font-semibold
+                                             px-4 py-2
+                                             rounded-full">
+
+                                    60 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- ROTI PUTIH -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+
+                                Roti Putih
+
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+
+                                1 iris
+
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100
+                                             text-blue-700
+                                             font-semibold
+                                             px-4 py-2
+                                             rounded-full">
+
+                                    20 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- NANAS -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+                                Nanas
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+                                1 buah 
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100 text-blue-700
+                                            font-semibold px-4 py-2
+                                            rounded-full">
+
+                                    450 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- JERUK MANIS -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+                                Jeruk manis
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+                                1 buah 
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100 text-blue-700
+                                            font-semibold px-4 py-2
+                                            rounded-full">
+
+                                    50 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- MANGGA -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+                                Mangga
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+                                1 buah sedang
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100 text-blue-700
+                                            font-semibold px-4 py-2
+                                            rounded-full">
+
+                                    50 gram
+
+                                </span>
+
+                            </td>
+
+                        <!-- PISANG -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+                                Pisang
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+                                1 buah sedang
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100 text-blue-700
+                                            font-semibold px-4 py-2
+                                            rounded-full">
+
+                                    50 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        </tr>
+
+                        <!-- TALAS -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+                                Talas
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+                                1 biji sedang
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100 text-blue-700
+                                            font-semibold px-4 py-2
+                                            rounded-full">
+
+                                    200 gram
+
+                                </span>
+
+                            </td>
+
+                        <!-- MiNYAK JAGUNG -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+                                Minyak Jagung
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+                                1 sendok teh
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100 text-blue-700
+                                            font-semibold px-4 py-2
+                                            rounded-full">
+
+                                    5 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        </tr>
+                        
+                        <!-- UBI -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+                                Ubi
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+                                1 biji sedang
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100 text-blue-700
+                                            font-semibold px-4 py-2
+                                            rounded-full">
+
+                                    150 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- KENTANG -->
+                        <tr class="hover:bg-blue-50 transition">
+
+                            <td class="px-6 py-5 font-semibold">
+
+                                Kentang
+
+                            </td>
+
+                            <td class="px-6 py-5 text-slate-600">
+
+                                1 biji sedang
+
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <span class="bg-blue-100
+                                             text-blue-700
+                                             font-semibold
+                                             px-4 py-2
+                                             rounded-full">
+
+                                    50 gram
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Pesan jika tidak ditemukan -->
+            <div id="dataTidakAda"
+                 class="hidden text-center
+                        py-12 text-slate-500">
+
+                <span class="material-symbols-outlined
+                             text-5xl mb-3">
+
+                    search_off
+
+                </span>
+
+                <p class="font-semibold">
+
+                    Bahan pangan tidak ditemukan
+
+                </p>
+
+                <p class="text-sm mt-1">
+
+                    Coba gunakan kata kunci lain.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Tombol ke kalkulator -->
+        <div class="text-center mt-10">
+
+            <a href="index.html"
+               class="inline-flex items-center gap-2
+                      bg-blue-600 text-white
+                      px-7 py-4 rounded-xl
+                      font-semibold
+                      hover:bg-blue-700
+                      transition">
+
+                <span class="material-symbols-outlined">
+
+                    calculate
+
+                </span>
+
+                Gunakan Kalkulator
+
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- JAVASCRIPT PENCARIAN -->
+    <script>
+
+        const inputCari =
+            document.getElementById("cariBahan");
+
+        const tabel =
+            document.getElementById("tabelKonversi");
+
+        const baris =
+            tabel.querySelectorAll("tbody tr");
+
+        const dataTidakAda =
+            document.getElementById("dataTidakAda");
+
+
+        inputCari.addEventListener("input", function () {
+
+            const kataKunci =
+                inputCari.value
+                .toLowerCase()
+                .trim();
+
+            let jumlahDitemukan = 0;
+
+
+            baris.forEach(function (barisTabel) {
+
+                const isiBaris =
+                    barisTabel.textContent
+                    .toLowerCase();
+
+
+                if (
+                    isiBaris.includes(kataKunci)
+                ) {
+
+                    barisTabel.style.display = "";
+
+                    jumlahDitemukan++;
+
+                } else {
+
+                    barisTabel.style.display = "none";
+
+                }
+
+            });
+
+
+            if (
+                jumlahDitemukan === 0
+            ) {
+
+                tabel.classList.add("hidden");
+
+                dataTidakAda.classList.remove("hidden");
+
+            } else {
+
+                tabel.classList.remove("hidden");
+
+                dataTidakAda.classList.add("hidden");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

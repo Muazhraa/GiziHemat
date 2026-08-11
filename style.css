@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+
+.container {
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+
+.card {
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin:10px 0;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+input, select {
+    width:100%;
+    padding:8px;
+    margin:5px 0;
+    box-sizing:border-box;
+}
+
+
+button {
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+
+.primary {
+    background:orange;
+    color:white;
+}
+
+
+.green {
+    background:green;
+    color:white;
+}
+
+
+.hidden {
+    display:none;
+}
+
+
+h2 {
+    text-align:center;
+}
+
+
+#hasil {
+
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+
+}
+
+
+#hasil .card {
+
+    margin-bottom:15px;
+
+}
+
+
+canvas {
+
+    margin-top:20px;
+    background:white;
+    border-radius:10px;
+
+}
+
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    }
+    
+    th,td{
+    border:1px solid #ddd;
+    padding:8px;
+    text-align:center;
+    }

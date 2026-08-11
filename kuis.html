@@ -1,0 +1,766 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Kuis Pemahaman - GiziHemat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            position: relative;
+        }
+        .active-nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: currentColor;
+        }
+        /* Custom radio styling for professional feel */
+        .quiz-radio:checked + label {
+            border-color: #0058be;
+            background-color: #eff4ff;
+        }
+
+    .quiz-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.check-icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-left: 15px;
+    border-radius: 50%;
+    background-color: #3b82f6;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.quiz-radio:checked + .quiz-option {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+}
+
+.quiz-radio:checked + .quiz-option .check-icon {
+    display: inline-flex;
+}
+    </style>
+    
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d8e2ff",
+                        "on-background": "#0b1c30",
+                        "surface-dim": "#cbdbf5",
+                        "surface": "#f8f9ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#00714d",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#a36700",
+                        "on-surface": "#0b1c30",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-high": "#dce9ff",
+                        "primary": "#0058be",
+                        "surface-container-highest": "#d3e4fe",
+                        "outline-variant": "#c2c6d6",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "tertiary": "#825100",
+                        "secondary-container": "#6cf8bb",
+                        "inverse-primary": "#adc6ff",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "on-primary-container": "#fefcff",
+                        "primary-container": "#2170e4",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-primary": "#ffffff",
+                        "outline": "#727785",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#424754",
+                        "surface-tint": "#005ac2",
+                        "on-secondary-fixed": "#002113",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#001a42",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary-fixed": "#ffddb8",
+                        "surface-container": "#e5eeff",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-primary-fixed-variant": "#004395",
+                        "secondary": "#006c49",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "inverse-surface": "#213145",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-container": "#fffbff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Public Sans"],
+                        "display-lg": ["Public Sans"],
+                        "body-sm": ["Public Sans"],
+                        "data-tabular": ["JetBrains Mono"],
+                        "title-md": ["Public Sans"],
+                        "headline-lg-mobile": ["Public Sans"],
+                        "label-caps": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "body-lg": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "data-tabular": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}[type='text'],input:where(:not([type])),[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select{-webkit-appearance:none;appearance:none;background-color:#fff;border-color:#6b7280;border-width:1px;border-radius:0px;padding-top:0.5rem;padding-right:0.75rem;padding-bottom:0.5rem;padding-left:0.75rem;font-size:1rem;line-height:1.5rem;--tw-shadow:0 0 #0000;}[type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);border-color:#2563eb}input::placeholder,textarea::placeholder{color:#6b7280;opacity:1}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-date-and-time-value{min-height:1.5em;text-align:inherit}::-webkit-datetime-edit{display:inline-flex}::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field{padding-top:0;padding-bottom:0}select{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");background-position:right 0.5rem center;background-repeat:no-repeat;background-size:1.5em 1.5em;padding-right:2.5rem;print-color-adjust:exact}[multiple],[size]:where(select:not([size="1"])){background-image:initial;background-position:initial;background-repeat:unset;background-size:initial;padding-right:0.75rem;print-color-adjust:unset}[type='checkbox'],[type='radio']{-webkit-appearance:none;appearance:none;padding:0;print-color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;user-select:none;flex-shrink:0;height:1rem;width:1rem;color:#2563eb;background-color:#fff;border-color:#6b7280;border-width:1px;--tw-shadow:0 0 #0000}[type='checkbox']{border-radius:0px}[type='radio']{border-radius:100%}[type='checkbox']:focus,[type='radio']:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:2px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}[type='checkbox']:checked,[type='radio']:checked{border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat}[type='checkbox']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");}@media (forced-colors: active) {[type='checkbox']:checked{-webkit-appearance:auto;appearance:auto}}[type='radio']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");}@media (forced-colors: active) {[type='radio']:checked{-webkit-appearance:auto;appearance:auto}}[type='checkbox']:checked:hover,[type='checkbox']:checked:focus,[type='radio']:checked:hover,[type='radio']:checked:focus{border-color:transparent;background-color:currentColor}[type='checkbox']:indeterminate{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat;}@media (forced-colors: active) {[type='checkbox']:indeterminate{-webkit-appearance:auto;appearance:auto}}[type='checkbox']:indeterminate:hover,[type='checkbox']:indeterminate:focus{border-color:transparent;background-color:currentColor}[type='file']{background:unset;border-color:inherit;border-width:0;border-radius:0;padding:0;font-size:unset;line-height:inherit}[type='file']:focus{outline:1px solid ButtonText;outline:1px auto -webkit-focus-ring-color}.fixed{position:fixed}.relative{position:relative}.sticky{position:sticky}.bottom-0{bottom:0px}.left-0{left:0px}.top-0{top:0px}.top-16{top:4rem}.z-50{z-index:50}.order-1{order:1}.order-2{order:2}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-6{margin-bottom:1.5rem}.mr-2{margin-right:0.5rem}.mt-2{margin-top:0.5rem}.mt-auto{margin-top:auto}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-2{height:0.5rem}.h-8{height:2rem}.h-\[calc\(1024px-64px\)\]{height:calc(1024px - 64px)}.h-full{height:100%}.min-h-\[1024px\]{min-height:1024px}.w-0{width:0px}.w-48{width:12rem}.w-64{width:16rem}.w-8{width:2rem}.w-full{width:100%}.max-w-4xl{max-width:56rem}.max-w-container-max{max-width:1280px}.flex-shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-12 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(3rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(3rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-full{border-radius:0.75rem}.rounded-lg{border-radius:0.25rem}.rounded-xl{border-radius:0.5rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-l-4{border-left-width:4px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-outline-variant{--tw-border-opacity:1;border-color:rgb(194 198 214 / var(--tw-border-opacity, 1))}.border-primary{--tw-border-opacity:1;border-color:rgb(0 88 190 / var(--tw-border-opacity, 1))}.bg-background{--tw-bg-opacity:1;background-color:rgb(248 249 255 / var(--tw-bg-opacity, 1))}.bg-primary{--tw-bg-opacity:1;background-color:rgb(0 88 190 / var(--tw-bg-opacity, 1))}.bg-primary-container{--tw-bg-opacity:1;background-color:rgb(33 112 228 / var(--tw-bg-opacity, 1))}.bg-secondary{--tw-bg-opacity:1;background-color:rgb(0 108 73 / var(--tw-bg-opacity, 1))}.bg-secondary-container{--tw-bg-opacity:1;background-color:rgb(108 248 187 / var(--tw-bg-opacity, 1))}.bg-surface{--tw-bg-opacity:1;background-color:rgb(248 249 255 / var(--tw-bg-opacity, 1))}.bg-surface-container-highest{--tw-bg-opacity:1;background-color:rgb(211 228 254 / var(--tw-bg-opacity, 1))}.bg-surface-container-low{--tw-bg-opacity:1;background-color:rgb(239 244 255 / var(--tw-bg-opacity, 1))}.bg-surface-dim{--tw-bg-opacity:1;background-color:rgb(203 219 245 / var(--tw-bg-opacity, 1))}.object-cover{object-fit:cover}.p-4{padding:1rem}.p-8{padding:2rem}.px-12{padding-left:3rem;padding-right:3rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-margin-desktop{padding-left:64px;padding-right:64px}.px-margin-mobile{padding-left:16px;padding-right:16px}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-1{padding-bottom:0.25rem}.pl-6{padding-left:1.5rem}.pt-10{padding-top:2.5rem}.font-body-lg{font-family:Public Sans}.font-body-md{font-family:Public Sans}.font-data-tabular{font-family:JetBrains Mono}.font-display-lg{font-family:Public Sans}.font-headline-lg{font-family:Public Sans}.font-headline-lg-mobile{font-family:Public Sans}.font-label-caps{font-family:Public Sans}.font-title-md{font-family:Public Sans}.text-body-lg{font-size:18px;line-height:28px;font-weight:400}.text-body-sm{font-size:14px;line-height:20px;font-weight:400}.text-data-tabular{font-size:14px;line-height:20px;font-weight:500}.text-display-lg{font-size:48px;line-height:56px;letter-spacing:-0.02em;font-weight:700}.text-headline-lg{font-size:32px;line-height:40px;font-weight:600}.text-headline-lg-mobile{font-size:24px;line-height:32px;font-weight:600}.text-label-caps{font-size:12px;line-height:16px;letter-spacing:0.05em;font-weight:700}.text-title-md{font-size:20px;line-height:28px;font-weight:600}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.tracking-widest{letter-spacing:0.1em}.text-on-background{--tw-text-opacity:1;color:rgb(11 28 48 / var(--tw-text-opacity, 1))}.text-on-primary{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-on-primary-container{--tw-text-opacity:1;color:rgb(254 252 255 / var(--tw-text-opacity, 1))}.text-on-secondary-container{--tw-text-opacity:1;color:rgb(0 113 77 / var(--tw-text-opacity, 1))}.text-on-surface{--tw-text-opacity:1;color:rgb(11 28 48 / var(--tw-text-opacity, 1))}.text-on-surface-variant{--tw-text-opacity:1;color:rgb(66 71 84 / var(--tw-text-opacity, 1))}.text-primary{--tw-text-opacity:1;color:rgb(0 88 190 / var(--tw-text-opacity, 1))}.shadow-\[0px_1px_3px_rgba\(0\2c 0\2c 0\2c 0\.1\)\]{--tw-shadow:0px 1px 3px rgba(0,0,0,0.1);--tw-shadow-colored:0px 1px 3px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.hover\:bg-surface-container:hover{--tw-bg-opacity:1;background-color:rgb(229 238 255 / var(--tw-bg-opacity, 1))}.hover\:bg-surface-container-high:hover{--tw-bg-opacity:1;background-color:rgb(220 233 255 / var(--tw-bg-opacity, 1))}.hover\:text-primary:hover{--tw-text-opacity:1;color:rgb(0 88 190 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.hover\:opacity-90:hover{opacity:0.9}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.dark\:border-outline:is(.dark *){--tw-border-opacity:1;border-color:rgb(114 119 133 / var(--tw-border-opacity, 1))}.dark\:border-primary-fixed:is(.dark *){--tw-border-opacity:1;border-color:rgb(216 226 255 / var(--tw-border-opacity, 1))}.dark\:bg-on-background:is(.dark *){--tw-bg-opacity:1;background-color:rgb(11 28 48 / var(--tw-bg-opacity, 1))}.dark\:text-primary-fixed:is(.dark *){--tw-text-opacity:1;color:rgb(216 226 255 / var(--tw-text-opacity, 1))}.dark\:text-surface-variant:is(.dark *){--tw-text-opacity:1;color:rgb(211 228 254 / var(--tw-text-opacity, 1))}.dark\:hover\:text-primary-fixed:hover:is(.dark *){--tw-text-opacity:1;color:rgb(216 226 255 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:order-1{order:1}.md\:order-2{order:2}.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-end{align-items:flex-end}.md\:px-margin-desktop{padding-left:64px;padding-right:64px}}@media (min-width: 1024px){.lg\:ml-64{margin-left:16rem}.lg\:flex{display:flex}.lg\:hidden{display:none}}</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}[type='text'],input:where(:not([type])),[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select{-webkit-appearance:none;appearance:none;background-color:#fff;border-color:#6b7280;border-width:1px;border-radius:0px;padding-top:0.5rem;padding-right:0.75rem;padding-bottom:0.5rem;padding-left:0.75rem;font-size:1rem;line-height:1.5rem;--tw-shadow:0 0 #0000;}[type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);border-color:#2563eb}input::placeholder,textarea::placeholder{color:#6b7280;opacity:1}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-date-and-time-value{min-height:1.5em;text-align:inherit}::-webkit-datetime-edit{display:inline-flex}::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field{padding-top:0;padding-bottom:0}select{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");background-position:right 0.5rem center;background-repeat:no-repeat;background-size:1.5em 1.5em;padding-right:2.5rem;print-color-adjust:exact}[multiple],[size]:where(select:not([size="1"])){background-image:initial;background-position:initial;background-repeat:unset;background-size:initial;padding-right:0.75rem;print-color-adjust:unset}[type='checkbox'],[type='radio']{-webkit-appearance:none;appearance:none;padding:0;print-color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;user-select:none;flex-shrink:0;height:1rem;width:1rem;color:#2563eb;background-color:#fff;border-color:#6b7280;border-width:1px;--tw-shadow:0 0 #0000}[type='checkbox']{border-radius:0px}[type='radio']{border-radius:100%}[type='checkbox']:focus,[type='radio']:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:2px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}[type='checkbox']:checked,[type='radio']:checked{border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat}[type='checkbox']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");}@media (forced-colors: active) {[type='checkbox']:checked{-webkit-appearance:auto;appearance:auto}}[type='radio']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");}@media (forced-colors: active) {[type='radio']:checked{-webkit-appearance:auto;appearance:auto}}[type='checkbox']:checked:hover,[type='checkbox']:checked:focus,[type='radio']:checked:hover,[type='radio']:checked:focus{border-color:transparent;background-color:currentColor}[type='checkbox']:indeterminate{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat;}@media (forced-colors: active) {[type='checkbox']:indeterminate{-webkit-appearance:auto;appearance:auto}}[type='checkbox']:indeterminate:hover,[type='checkbox']:indeterminate:focus{border-color:transparent;background-color:currentColor}[type='file']{background:unset;border-color:inherit;border-width:0;border-radius:0;padding:0;font-size:unset;line-height:inherit}[type='file']:focus{outline:1px solid ButtonText;outline:1px auto -webkit-focus-ring-color}.fixed{position:fixed}.relative{position:relative}.sticky{position:sticky}.left-0{left:0px}.top-0{top:0px}.top-16{top:4rem}.bottom-0{bottom:0px}.z-50{z-index:50}.order-1{order:1}.order-2{order:2}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-6{margin-bottom:1.5rem}.mr-2{margin-right:0.5rem}.mt-2{margin-top:0.5rem}.mt-auto{margin-top:auto}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-2{height:0.5rem}.h-8{height:2rem}.h-\[calc\(1024px-64px\)\]{height:calc(1024px - 64px)}.h-full{height:100%}.min-h-\[1024px\]{min-height:1024px}.w-0{width:0px}.w-48{width:12rem}.w-64{width:16rem}.w-8{width:2rem}.w-full{width:100%}.max-w-4xl{max-width:56rem}.max-w-container-max{max-width:1280px}.flex-shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-8{gap:2rem}.gap-6{gap:1.5rem}.space-y-12 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(3rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(3rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-full{border-radius:0.75rem}.rounded-lg{border-radius:0.25rem}.rounded-xl{border-radius:0.5rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-l-4{border-left-width:4px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-outline-variant{--tw-border-opacity:1;border-color:rgb(194 198 214 / var(--tw-border-opacity, 1))}.border-primary{--tw-border-opacity:1;border-color:rgb(0 88 190 / var(--tw-border-opacity, 1))}.bg-background{--tw-bg-opacity:1;background-color:rgb(248 249 255 / var(--tw-bg-opacity, 1))}.bg-primary{--tw-bg-opacity:1;background-color:rgb(0 88 190 / var(--tw-bg-opacity, 1))}.bg-primary-container{--tw-bg-opacity:1;background-color:rgb(33 112 228 / var(--tw-bg-opacity, 1))}.bg-secondary{--tw-bg-opacity:1;background-color:rgb(0 108 73 / var(--tw-bg-opacity, 1))}.bg-secondary-container{--tw-bg-opacity:1;background-color:rgb(108 248 187 / var(--tw-bg-opacity, 1))}.bg-surface{--tw-bg-opacity:1;background-color:rgb(248 249 255 / var(--tw-bg-opacity, 1))}.bg-surface-container-highest{--tw-bg-opacity:1;background-color:rgb(211 228 254 / var(--tw-bg-opacity, 1))}.bg-surface-container-low{--tw-bg-opacity:1;background-color:rgb(239 244 255 / var(--tw-bg-opacity, 1))}.bg-surface-dim{--tw-bg-opacity:1;background-color:rgb(203 219 245 / var(--tw-bg-opacity, 1))}.object-cover{object-fit:cover}.p-4{padding:1rem}.p-8{padding:2rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-margin-desktop{padding-left:64px;padding-right:64px}.px-margin-mobile{padding-left:16px;padding-right:16px}.py-12{padding-top:3rem;padding-bottom:3rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.px-12{padding-left:3rem;padding-right:3rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-1{padding-bottom:0.25rem}.pl-6{padding-left:1.5rem}.pt-10{padding-top:2.5rem}.font-body-lg{font-family:Public Sans}.font-body-md{font-family:Public Sans}.font-data-tabular{font-family:JetBrains Mono}.font-display-lg{font-family:Public Sans}.font-headline-lg{font-family:Public Sans}.font-label-caps{font-family:Public Sans}.font-title-md{font-family:Public Sans}.font-headline-lg-mobile{font-family:Public Sans}.text-body-lg{font-size:18px;line-height:28px;font-weight:400}.text-body-sm{font-size:14px;line-height:20px;font-weight:400}.text-data-tabular{font-size:14px;line-height:20px;font-weight:500}.text-display-lg{font-size:48px;line-height:56px;letter-spacing:-0.02em;font-weight:700}.text-headline-lg{font-size:32px;line-height:40px;font-weight:600}.text-headline-lg-mobile{font-size:24px;line-height:32px;font-weight:600}.text-label-caps{font-size:12px;line-height:16px;letter-spacing:0.05em;font-weight:700}.text-title-md{font-size:20px;line-height:28px;font-weight:600}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.tracking-widest{letter-spacing:0.1em}.text-on-background{--tw-text-opacity:1;color:rgb(11 28 48 / var(--tw-text-opacity, 1))}.text-on-primary{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-on-primary-container{--tw-text-opacity:1;color:rgb(254 252 255 / var(--tw-text-opacity, 1))}.text-on-secondary-container{--tw-text-opacity:1;color:rgb(0 113 77 / var(--tw-text-opacity, 1))}.text-on-surface{--tw-text-opacity:1;color:rgb(11 28 48 / var(--tw-text-opacity, 1))}.text-on-surface-variant{--tw-text-opacity:1;color:rgb(66 71 84 / var(--tw-text-opacity, 1))}.text-primary{--tw-text-opacity:1;color:rgb(0 88 190 / var(--tw-text-opacity, 1))}.shadow-\[0px_1px_3px_rgba\(0\2c 0\2c 0\2c 0\.1\)\]{--tw-shadow:0px 1px 3px rgba(0,0,0,0.1);--tw-shadow-colored:0px 1px 3px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.hover\:bg-surface-container:hover{--tw-bg-opacity:1;background-color:rgb(229 238 255 / var(--tw-bg-opacity, 1))}.hover\:bg-surface-container-high:hover{--tw-bg-opacity:1;background-color:rgb(220 233 255 / var(--tw-bg-opacity, 1))}.hover\:text-primary:hover{--tw-text-opacity:1;color:rgb(0 88 190 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.hover\:opacity-90:hover{opacity:0.9}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.dark\:border-outline:is(.dark *){--tw-border-opacity:1;border-color:rgb(114 119 133 / var(--tw-border-opacity, 1))}.dark\:border-primary-fixed:is(.dark *){--tw-border-opacity:1;border-color:rgb(216 226 255 / var(--tw-border-opacity, 1))}.dark\:bg-on-background:is(.dark *){--tw-bg-opacity:1;background-color:rgb(11 28 48 / var(--tw-bg-opacity, 1))}.dark\:text-primary-fixed:is(.dark *){--tw-text-opacity:1;color:rgb(216 226 255 / var(--tw-text-opacity, 1))}.dark\:text-surface-variant:is(.dark *){--tw-text-opacity:1;color:rgb(211 228 254 / var(--tw-text-opacity, 1))}.dark\:hover\:text-primary-fixed:hover:is(.dark *){--tw-text-opacity:1;color:rgb(216 226 255 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:order-1{order:1}.md\:order-2{order:2}.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-end{align-items:flex-end}.md\:px-margin-desktop{padding-left:64px;padding-right:64px}}@media (min-width: 1024px){.lg\:ml-64{margin-left:16rem}.lg\:flex{display:flex}.lg\:hidden{display:none}}</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}[type='text'],input:where(:not([type])),[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select{-webkit-appearance:none;appearance:none;background-color:#fff;border-color:#6b7280;border-width:1px;border-radius:0px;padding-top:0.5rem;padding-right:0.75rem;padding-bottom:0.5rem;padding-left:0.75rem;font-size:1rem;line-height:1.5rem;--tw-shadow:0 0 #0000;}[type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);border-color:#2563eb}input::placeholder,textarea::placeholder{color:#6b7280;opacity:1}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-date-and-time-value{min-height:1.5em;text-align:inherit}::-webkit-datetime-edit{display:inline-flex}::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field{padding-top:0;padding-bottom:0}select{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");background-position:right 0.5rem center;background-repeat:no-repeat;background-size:1.5em 1.5em;padding-right:2.5rem;print-color-adjust:exact}[multiple],[size]:where(select:not([size="1"])){background-image:initial;background-position:initial;background-repeat:unset;background-size:initial;padding-right:0.75rem;print-color-adjust:unset}[type='checkbox'],[type='radio']{-webkit-appearance:none;appearance:none;padding:0;print-color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;user-select:none;flex-shrink:0;height:1rem;width:1rem;color:#2563eb;background-color:#fff;border-color:#6b7280;border-width:1px;--tw-shadow:0 0 #0000}[type='checkbox']{border-radius:0px}[type='radio']{border-radius:100%}[type='checkbox']:focus,[type='radio']:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:2px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}[type='checkbox']:checked,[type='radio']:checked{border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat}[type='checkbox']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");}@media (forced-colors: active) {[type='checkbox']:checked{-webkit-appearance:auto;appearance:auto}}[type='radio']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");}@media (forced-colors: active) {[type='radio']:checked{-webkit-appearance:auto;appearance:auto}}[type='checkbox']:checked:hover,[type='checkbox']:checked:focus,[type='radio']:checked:hover,[type='radio']:checked:focus{border-color:transparent;background-color:currentColor}[type='checkbox']:indeterminate{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat;}@media (forced-colors: active) {[type='checkbox']:indeterminate{-webkit-appearance:auto;appearance:auto}}[type='checkbox']:indeterminate:hover,[type='checkbox']:indeterminate:focus{border-color:transparent;background-color:currentColor}[type='file']{background:unset;border-color:inherit;border-width:0;border-radius:0;padding:0;font-size:unset;line-height:inherit}[type='file']:focus{outline:1px solid ButtonText;outline:1px auto -webkit-focus-ring-color}.fixed{position:fixed}.relative{position:relative}.sticky{position:sticky}.bottom-0{bottom:0px}.left-0{left:0px}.top-0{top:0px}.top-16{top:4rem}.z-50{z-index:50}.order-1{order:1}.order-2{order:2}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-6{margin-bottom:1.5rem}.mr-2{margin-right:0.5rem}.mt-2{margin-top:0.5rem}.mt-auto{margin-top:auto}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-2{height:0.5rem}.h-8{height:2rem}.h-\[calc\(1024px-64px\)\]{height:calc(1024px - 64px)}.h-full{height:100%}.min-h-\[1024px\]{min-height:1024px}.w-0{width:0px}.w-48{width:12rem}.w-64{width:16rem}.w-8{width:2rem}.w-full{width:100%}.max-w-4xl{max-width:56rem}.max-w-container-max{max-width:1280px}.flex-shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-12 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(3rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(3rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-full{border-radius:0.75rem}.rounded-lg{border-radius:0.25rem}.rounded-xl{border-radius:0.5rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-l-4{border-left-width:4px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-outline-variant{--tw-border-opacity:1;border-color:rgb(194 198 214 / var(--tw-border-opacity, 1))}.border-primary{--tw-border-opacity:1;border-color:rgb(0 88 190 / var(--tw-border-opacity, 1))}.bg-background{--tw-bg-opacity:1;background-color:rgb(248 249 255 / var(--tw-bg-opacity, 1))}.bg-primary{--tw-bg-opacity:1;background-color:rgb(0 88 190 / var(--tw-bg-opacity, 1))}.bg-primary-container{--tw-bg-opacity:1;background-color:rgb(33 112 228 / var(--tw-bg-opacity, 1))}.bg-secondary{--tw-bg-opacity:1;background-color:rgb(0 108 73 / var(--tw-bg-opacity, 1))}.bg-secondary-container{--tw-bg-opacity:1;background-color:rgb(108 248 187 / var(--tw-bg-opacity, 1))}.bg-surface{--tw-bg-opacity:1;background-color:rgb(248 249 255 / var(--tw-bg-opacity, 1))}.bg-surface-container-highest{--tw-bg-opacity:1;background-color:rgb(211 228 254 / var(--tw-bg-opacity, 1))}.bg-surface-container-low{--tw-bg-opacity:1;background-color:rgb(239 244 255 / var(--tw-bg-opacity, 1))}.bg-surface-dim{--tw-bg-opacity:1;background-color:rgb(203 219 245 / var(--tw-bg-opacity, 1))}.object-cover{object-fit:cover}.p-4{padding:1rem}.p-8{padding:2rem}.px-12{padding-left:3rem;padding-right:3rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-margin-desktop{padding-left:64px;padding-right:64px}.px-margin-mobile{padding-left:16px;padding-right:16px}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-1{padding-bottom:0.25rem}.pl-6{padding-left:1.5rem}.pt-10{padding-top:2.5rem}.font-body-lg{font-family:Public Sans}.font-body-md{font-family:Public Sans}.font-data-tabular{font-family:JetBrains Mono}.font-display-lg{font-family:Public Sans}.font-headline-lg{font-family:Public Sans}.font-headline-lg-mobile{font-family:Public Sans}.font-label-caps{font-family:Public Sans}.font-title-md{font-family:Public Sans}.text-body-lg{font-size:18px;line-height:28px;font-weight:400}.text-body-sm{font-size:14px;line-height:20px;font-weight:400}.text-data-tabular{font-size:14px;line-height:20px;font-weight:500}.text-display-lg{font-size:48px;line-height:56px;letter-spacing:-0.02em;font-weight:700}.text-headline-lg{font-size:32px;line-height:40px;font-weight:600}.text-headline-lg-mobile{font-size:24px;line-height:32px;font-weight:600}.text-label-caps{font-size:12px;line-height:16px;letter-spacing:0.05em;font-weight:700}.text-title-md{font-size:20px;line-height:28px;font-weight:600}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.tracking-widest{letter-spacing:0.1em}.text-on-background{--tw-text-opacity:1;color:rgb(11 28 48 / var(--tw-text-opacity, 1))}.text-on-primary{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-on-primary-container{--tw-text-opacity:1;color:rgb(254 252 255 / var(--tw-text-opacity, 1))}.text-on-secondary-container{--tw-text-opacity:1;color:rgb(0 113 77 / var(--tw-text-opacity, 1))}.text-on-surface{--tw-text-opacity:1;color:rgb(11 28 48 / var(--tw-text-opacity, 1))}.text-on-surface-variant{--tw-text-opacity:1;color:rgb(66 71 84 / var(--tw-text-opacity, 1))}.text-primary{--tw-text-opacity:1;color:rgb(0 88 190 / var(--tw-text-opacity, 1))}.shadow-\[0px_1px_3px_rgba\(0\2c 0\2c 0\2c 0\.1\)\]{--tw-shadow:0px 1px 3px rgba(0,0,0,0.1);--tw-shadow-colored:0px 1px 3px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.hover\:bg-surface-container:hover{--tw-bg-opacity:1;background-color:rgb(229 238 255 / var(--tw-bg-opacity, 1))}.hover\:bg-surface-container-high:hover{--tw-bg-opacity:1;background-color:rgb(220 233 255 / var(--tw-bg-opacity, 1))}.hover\:text-primary:hover{--tw-text-opacity:1;color:rgb(0 88 190 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.hover\:opacity-90:hover{opacity:0.9}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.dark\:border-outline:is(.dark *){--tw-border-opacity:1;border-color:rgb(114 119 133 / var(--tw-border-opacity, 1))}.dark\:border-primary-fixed:is(.dark *){--tw-border-opacity:1;border-color:rgb(216 226 255 / var(--tw-border-opacity, 1))}.dark\:bg-on-background:is(.dark *){--tw-bg-opacity:1;background-color:rgb(11 28 48 / var(--tw-bg-opacity, 1))}.dark\:text-primary-fixed:is(.dark *){--tw-text-opacity:1;color:rgb(216 226 255 / var(--tw-text-opacity, 1))}.dark\:text-surface-variant:is(.dark *){--tw-text-opacity:1;color:rgb(211 228 254 / var(--tw-text-opacity, 1))}.dark\:hover\:text-primary-fixed:hover:is(.dark *){--tw-text-opacity:1;color:rgb(216 226 255 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:order-1{order:1}.md\:order-2{order:2}.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-end{align-items:flex-end}.md\:px-margin-desktop{padding-left:64px;padding-right:64px}}@media (min-width: 1024px){.lg\:ml-64{margin-left:16rem}.lg\:flex{display:flex}.lg\:hidden{display:none}}</style></head>
+<body class="bg-background text-on-background font-body-md min-h-[1024px] flex flex-col dark:bg-slate-950" data-stitch-vh="min-h-[1024px]===min-h-screen" data-mode="connect">
+<!-- TopNavBar -->
+<nav class="bg-white dark:bg-gray-800 shadow-sm rounded-xl">
+    <div class="flex justify-between items-center max-w-container-max mx-auto h-16 px-6">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl">analytics</span>
+            <span class="font-bold text-xl text-gray-900 dark:text-white">
+                Gizi Hemat
+            </span>
+        </div>
+
+        <!-- Menu -->
+        <div class="flex items-center gap-8">
+            <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Beranda</a>
+
+            <a href="petunjuk.html" class="text-gray-700 hover:text-blue-600 font-medium">Petunjuk</a>
+
+            <a href="konversi-berat.html" class="text-gray-700 hover:text-blue-600 font-medium">Konversi Berat</a>
+
+            <a href="kuis.html"
+               class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium">
+                Kuis
+            </a>
+            <button onclick="toggleDarkMode()"
+                    class="p-2 text-slate-500 hover:text-primary">
+                <span class="material-symbols-outlined">dark_mode</span>
+            </button>
+
+            <span class="material-symbols-outlined text-slate-500 cursor-pointer">
+                help
+            </span>
+        </div>
+
+    </div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 flex-grow px-margin-mobile md:px-margin-desktop py-12 max-w-container-max mx-auto w-full">
+<!-- Header Section -->
+<header class="mb-6 border-l-4 border-primary pl-4">
+<div class="flex flex-col md:flex-row md:items-end flex justify-center gap-5">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Kuis Pemahaman</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Uji pemahaman anda tentang harga zat gizi.</p>
+</div>
+<div class="bg-surface-container-highest px-4 py-2 rounded-xl border border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Progress</span>
+<span class="font-data-tabular text-data-tabular text-primary" id="progress-text">0 / 7 Selesai</span>
+</div>
+<div class="w-48 h-2 bg-surface-dim rounded-full mt-1 overflow-hidden">
+<div class="h-full bg-secondary w-0 transition-all duration-500" id="progress-bar"></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Quiz Container -->
+<div class="space-y-8 max-w-4xl">
+<form class="space-y-12" id="quiz-form">
+<!-- Question 1 -->
+<section class="bg-surface p-8 rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] border border-outline-variant">
+<div class="flex gap-4 items-start">
+<span class="flex-shrink-0 w-8 h-8 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center font-bold">1</span>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Langkah pertama yang harus dilakukan pengguna saat menggunakan website adalah…..</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative">
+<input class="hidden quiz-radio" id="q1a" name="q1" type="radio" value="A">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q1a">
+<span class="font-bold mr-2">A.</span> Menghitung zat gizi
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q1b" name="q1" type="radio" value="B">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q1b">
+<span class="font-bold mr-2">B.</span> Memilih bahan pangan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q1c" name="q1" type="radio" value="C">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q1c">
+<span class="font-bold mr-2">C.</span> Mengunduh hasil
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q1d" name="q1" type="radio" value="D">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q1d">
+<span class="font-bold mr-2">D.</span> Membandingkan bahan pangan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Question 2 -->
+<section class="bg-surface p-8 rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] border border-outline-variant">
+<div class="flex gap-4 items-start">
+<span class="flex-shrink-0 w-8 h-8 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center font-bold">2</span>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Input yang diperlukan dalam perhitungan pada website ini adalah…..</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative">
+<input class="hidden quiz-radio" id="q2a" name="q2" type="radio" value="A">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q2a">
+<span class="font-bold mr-2">A.</span> Nama bahan dan berat bahan pangan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q2b" name="q2" type="radio" value="B">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q2b">
+<span class="font-bold mr-2">B.</span> Berat dan harga bahan pangan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q2c" name="q2" type="radio" value="C">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q2c">
+<span class="font-bold mr-2">C.</span> Harga bahan pangan saja
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q2d" name="q2" type="radio" value="D">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q2d">
+<span class="font-bold mr-2">D.</span> Bahan, berat, dan harga bahan pangan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Question 3 -->
+<section class="bg-surface p-8 rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] border border-outline-variant">
+<div class="flex gap-4 items-start">
+<span class="flex-shrink-0 w-8 h-8 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center font-bold">3</span>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Fungsi dari Bagian yang Dapat Dimakan (BDD) dalam perhitungan adalah…..</h3>
+<div class="grid grid-cols-1 gap-4">
+<div class="relative">
+<input class="hidden quiz-radio" id="q3a" name="q3" type="radio" value="A">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q3a">
+<span class="font-bold mr-2">A.</span> Menentukan harga bahan pangan yang akan digunakan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q3b" name="q3" type="radio" value="B">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q3b">
+<span class="font-bold mr-2">B.</span> Menentukan berat bersih bahan yang dapat dikonsumsi
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q3c" name="q3" type="radio" value="C">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q3c">
+<span class="font-bold mr-2">C.</span> Menentukan jumlah kalori bahan pangan pada satu menu
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q3d" name="q3" type="radio" value="D">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q3d">
+<span class="font-bold mr-2">D.</span> Menentukan jenis bahan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Question 4 -->
+<section class="bg-surface p-8 rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] border border-outline-variant">
+<div class="flex gap-4 items-start">
+<span class="flex-shrink-0 w-8 h-8 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center font-bold">4</span>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Output utama dari website ini adalah…..</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative">
+<input class="hidden quiz-radio" id="q4a" name="q4" type="radio" value="A">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q4a">
+<span class="font-bold mr-2">A.</span> Resep makanan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q4b" name="q4" type="radio" value="B">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q4b">
+<span class="font-bold mr-2">B.</span> Kandungan vitamin lengkap
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q4c" name="q4" type="radio" value="C">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q4c">
+<span class="font-bold mr-2">C.</span> Harga per satuan zat gizi
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q4d" name="q4" type="radio" value="D">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q4d">
+<span class="font-bold mr-2">D.</span> Daftar bahan makanan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Question 5 -->
+<section class="bg-surface p-8 rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] border border-outline-variant">
+<div class="flex gap-4 items-start">
+<span class="flex-shrink-0 w-8 h-8 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center font-bold">5</span>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Fitur “Bandingkan” digunakan untuk…..</h3>
+<div class="grid grid-cols-1 gap-4">
+<div class="relative">
+<input class="hidden quiz-radio" id="q5a" name="q5" type="radio" value="A">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q5a">
+<span class="font-bold mr-2">A.</span> Menghitung satu bahan pangan untuk merencanakan satu menu makanan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q5b" name="q5" type="radio" value="B">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q5b">
+<span class="font-bold mr-2">B.</span> Menyimpan data bahan pangan agar dapat dilihat kembali
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q5c" name="q5" type="radio" value="C">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q5c">
+<span class="font-bold mr-2">C.</span> Membandingkan efisiensi harga zat gizi antar bahan pangan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q5d" name="q5" type="radio" value="D">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q5d">
+<span class="font-bold mr-2">D.</span> Menghapus data harga zat gizi antar bahan pangan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Question 6 -->
+<section class="bg-surface p-8 rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] border border-outline-variant">
+<div class="flex gap-4 items-start">
+<span class="flex-shrink-0 w-8 h-8 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center font-bold">6</span>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Definisi harga zat gizi adalah…..</h3>
+<div class="grid grid-cols-1 gap-4">
+<div class="relative">
+<input class="hidden quiz-radio" id="q6a" name="q6" type="radio" value="A">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q6a">
+<span class="font-bold mr-2">A.</span> Harga bahan pangan yang terdapat di pasar pada kondisi dan situasi tertentu
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q6b" name="q6" type="radio" value="B">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q6b">
+<span class="font-bold mr-2">B.</span> Biaya yang dikeluarkan untuk memperoleh sejumlah zat gizi tertentu dari bahan pangan
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q6c" name="q6" type="radio" value="C">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q6c">
+<span class="font-bold mr-2">C.</span> Jumlah zat gizi yang dikeluarkan dalam bahan pangan yang akan digunakan dalam membuat suatu menu
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q6d" name="q6" type="radio" value="D">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q6d">
+<span class="font-bold mr-2">D.</span> Nilai kalori dari suatu bahan pangan yang terdapat dalam satu menu
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Question 7 -->
+<section class="bg-surface p-8 rounded-xl shadow-[0px_1px_3px_rgba(0,0,0,0.1)] border border-outline-variant">
+<div class="flex gap-4 items-start">
+<span class="flex-shrink-0 w-8 h-8 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center font-bold">7</span>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Manfaat mengetahui harga zat gizi adalah…..</h3>
+<div class="grid grid-cols-1 gap-4">
+<div class="relative">
+<input class="hidden quiz-radio" id="q7a" name="q7" type="radio" value="A">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q7a">
+<span class="font-bold mr-2">A.</span> Menentukan rasa bahan pangan yang akan diolah sesuai dengan kesukaan pengguna
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q7b" name="q7" type="radio" value="B">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q7b">
+<span class="font-bold mr-2">B.</span> Memperkirakan umur simpan bahan pangan yang akan dipilih pengguna
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q7c" name="q7" type="radio" value="C">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q7c">
+<span class="font-bold mr-2">C.</span> Membantu memilih bahan pangan yang paling efisien secara gizi dan biaya
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+<div class="relative">
+<input class="hidden quiz-radio" id="q7d" name="q7" type="radio" value="D">
+<label class="quiz-option block border border-outline-variant p-4 rounded-lg cursor-pointer hover:bg-surface-container transition-colors" for="q7d">
+<span class="font-bold mr-2">D.</span> Menentukkan warna bahan pangan yang lebih menarik 
+<span class="check-icon">✓</span>                                    
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Actions -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 pt-10">
+<button type="button" onclick="mulaiUlangKuis()" class="order-2 md:order-1 flex items-center gap-2 text-primary font-bold hover:underline transition-all" type="button">
+<span class="material-symbols-outlined">refresh</span>
+Mulai Ulang Kuis
+<button type="submit" class="order-1 md:order-2 bg-primary text-on-primary px-12 py-4 rounded-full font-headline-lg-mobile shadow-md hover:opacity-90 active:scale-95 transition-all" type="submit">
+                        Kirim Jawaban
+                    </button>
+<div id="hasilKuis" class="hidden mt-10 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 p-6">
+
+    <div class="flex items-center mb-4">
+        <span class="material-symbols-outlined text-green-600 mr-2">
+            quiz
+        </span>
+
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+            Hasil Kuis
+        </h2>
+    </div>
+
+    <div class="space-y-4">
+
+        <div class="grid grid-cols-[1fr_auto] items-center">
+            <span class="text-gray-600 dark:text-gray-400">Skor</span>
+            <span id="skorKuis" class="font-bold text-gray-900 dark:text-white"></span>
+        </div>
+
+        <div class="grid grid-cols-[1fr_auto] items-center">
+            <span class="text-gray-600 dark:text-gray-400">Persentase</span>
+            <span id="persentaseKuis" class="font-bold text-gray-900 dark:text-white"></span>
+        </div>
+
+        <div class="grid grid-cols-[1fr_auto] items-center">
+            <span class="text-gray-600 dark:text-gray-400">Kategori Pemahaman</span>
+            <span id="kategoriKuis" class="font-bold text-gray-900 dark:text-white"></span>
+        </div>
+
+    </div>
+
+    <div class="mt-5">
+        <p id="pesanKuis" class="text-sm"></p>
+    </div>
+
+    <div class="mt-6">
+        <button
+            id="btnKalkulator"
+            onclick="window.location.href='index.html'"
+            disabled
+            class="w-full px-4 py-3 rounded-xl bg-gray-300 text-gray-500 font-semibold cursor-not-allowed transition-all">
+            Mulai Menggunakan Kalkulator
+        </button>
+    </div>
+
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<footer class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-on-background shadow-sm border-t border-outline-variant dark:border-outline">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+        </a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">quiz</span> Quiz
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">person</span> Profile
+        </a>
+</footer>
+<script>
+        // Micro-interaction: Progress Tracking
+        const form = document.getElementById('quiz-form');
+        const radios = form.querySelectorAll('input[type="radio"]');
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const totalQuestions = 7;
+
+        function updateProgress() {
+            const answeredCount = new Set([...radios].filter(r => r.checked).map(r => r.name)).size;
+            const progressPercentage = (answeredCount / totalQuestions) * 100;
+            
+            progressText.innerText = `${answeredCount} / ${totalQuestions} Selesai`;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', updateProgress);
+        });
+
+        const kunciJawaban = {
+    q1: "B", // sesuaikan dengan jawaban benar
+    q2: "D",
+    q3: "B",
+    q4: "C",
+    q5: "C",
+    q6: "B",
+    q7: "C"
+};
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const answeredCount = new Set([...radios].filter(r => r.checked).map(r => r.name)).size;
+            
+            if (answeredCount < totalQuestions) {
+                alert(`Harap selesaikan semua pertanyaan. Anda baru menjawab ${answeredCount} dari ${totalQuestions}.`);
+            } else {
+                let skor = 0;
+
+for (let soal in kunciJawaban) {
+
+    const jawaban = document.querySelector(`input[name="${soal}"]:checked`);
+
+    if (jawaban && jawaban.value === kunciJawaban[soal]) {
+        skor++;
+    }
+
+}
+
+const persentase = (skor / totalQuestions) * 100;
+
+let kategori = "";
+
+if (persentase >= 80) {
+    kategori = "Baik";
+} else if (persentase >= 50) {
+    kategori = "Sedang";
+} else {
+    kategori = "Kurang";
+}
+
+let pesan = "";
+
+if (kategori === "Baik") {
+
+    pesan = "Selamat! Pemahaman Anda terhadap penggunaan Website Kalkulator Harga Zat Gizi termasuk kategori Baik.";
+
+} else if (kategori === "Sedang") {
+
+    pesan = "Pemahaman Anda termasuk kategori Sedang. Silakan baca kembali petunjuk penggunaan, kemudian kerjakan ulang kuis sebelum menggunakan Website Kalkulator Harga Zat Gizi.";
+
+} else {
+
+    pesan = "Pemahaman Anda masih termasuk kategori Kurang. Silakan baca kembali petunjuk penggunaan, kemudian kerjakan ulang kuis sebelum menggunakan Website Kalkulator Harga Zat Gizi.";
+
+}
+
+const btnKalkulator = document.getElementById("btnKalkulator");
+
+if (kategori === "Baik") {
+
+    btnKalkulator.disabled = false;
+    btnKalkulator.textContent = "Mulai Menggunakan Kalkulator";
+
+    btnKalkulator.onclick = function () {
+        window.location.href = "index.html";
+    };
+
+    btnKalkulator.classList.remove(
+        "bg-gray-300",
+        "text-gray-500",
+        "cursor-not-allowed"
+    );
+
+    btnKalkulator.classList.add(
+        "bg-primary",
+        "text-white",
+        "hover:bg-blue-600"
+    );
+
+} else {
+
+    btnKalkulator.disabled = false;
+
+    btnKalkulator.textContent = "Baca Petunjuk Penggunaan";
+
+    btnKalkulator.onclick = function () {
+        window.location.href = "petunjuk.html";
+    };
+
+    btnKalkulator.classList.remove(
+        "bg-gray-300",
+        "text-gray-500",
+        "cursor-not-allowed"
+    );
+
+    btnKalkulator.classList.add(
+        "bg-yellow-500",
+        "text-white",
+        "hover:bg-yellow-600"
+    );
+
+}
+
+if (kategori === "Baik") {
+    localStorage.setItem("aksesKalkulator", "true");
+} else {
+    localStorage.removeItem("aksesKalkulator");
+}
+
+document.getElementById("hasilKuis").classList.remove("hidden");
+document.getElementById("hasilKuis").scrollIntoView({
+    behavior: "smooth"
+});
+
+document.getElementById("skorKuis").textContent =
+`${skor}/${totalQuestions}`;
+
+console.log(document.getElementById("persentaseKuis"));
+console.log(document.getElementById("kategoriKuis"));
+console.log(document.getElementById("pesanKuis"));
+
+document.getElementById("persentaseKuis").textContent =
+`${persentase.toFixed(1)}%`;
+
+document.getElementById("kategoriKuis").textContent =
+kategori;
+
+document.getElementById("pesanKuis").textContent =
+pesan;
+const box = document.getElementById("pesanKuis");
+
+if (kategori === "Baik") {
+
+    box.className =
+    "mt-5 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800";
+
+}
+else if (kategori === "Sedang") {
+
+    box.className =
+    "mt-5 p-4 rounded-lg bg-yellow-50 border border-yellow-200 text-yellow-800";
+
+}
+else {
+
+    box.className =
+    "mt-5 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800";
+
+}
+
+document.getElementById("hasilKuis").scrollIntoView({
+    behavior: "smooth"
+});
+            }
+
+        });
+function mulaiUlangKuis() {
+
+    // Reset form
+    document.querySelector("form").reset();
+
+    // Hapus semua efek pilihan pada label
+    document.querySelectorAll("label").forEach(label => {
+        label.classList.remove(
+            "bg-primary-container",
+            "border-primary",
+            "text-on-primary-container",
+            "ring-2",
+            "ring-primary"
+        );
+    });
+
+    // Reset progress
+    progressText.innerText = "0 / 7 Selesai";
+    progressBar.style.width = "0%";
+
+    // Sembunyikan hasil
+    document.getElementById("hasilKuis").classList.add("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+    </script>
+<script src="script.js"></script>
+</body></html>
