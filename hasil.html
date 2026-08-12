@@ -485,14 +485,14 @@
 <th class="px-6 py-3 border-l border-gray-200 dark:border-gray-700 bg-blue-50/50 dark:bg-blue-900/10">
 <div class="text-center">
 <span class="block text-xs text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-wider mb-1">Bahan A</span>
-<span id="namaA" class="block text-lg font-bold text-gray-900 dark:text-white">Daging Ayam</span>
+<span id="namaA" class="block text-lg font-bold text-gray-900 dark:text-white"></span>
 <span class="block text-xs text-gray-500 dark:text-gray-400 mt-1"><span id="detailA"></span>
 </div>
 </th>
 <th class="px-6 py-3 border-l border-gray-200 dark:border-gray-700 bg-green-50/50 dark:bg-green-900/10">
 <div class="text-center">
 <span class="block text-xs text-green-600 dark:text-green-400 font-semibold uppercase tracking-wider mb-1">Bahan B</span>
-<span id="namaB" class="block text-lg font-bold text-gray-900 dark:text-white">Telur Ayam Ras</span>
+<span id="namaB" class="block text-lg font-bold text-gray-900 dark:text-white"></span>
 <span class="block text-xs text-gray-500 dark:text-gray-400 mt-1"><span id="detailB"></span>
 </div>
 </th>
@@ -643,8 +643,8 @@ Hasil perhitungan menampilkan harga setiap zat gizi per rupiah dari bahan pangan
 <span class="material-symbols-outlined text-[18px] mr-2">sync_alt</span>
                             Bandingkan Bahan Lain
                         </button>
-<button onclick="lanjutKuis()"class="w-full flex justify-center items-center px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md shadow-sm text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-<span class="material-symbols-outlined text-[16px] mr-2">edit</span>Lanjut Ke Kus</button>
+<button onclick="konversiBerat()"class="w-full flex justify-center items-center px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md shadow-sm text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[16px] mr-2">scale</span>Konversi Berat</button>
 </div>
 </div>
 </div>
@@ -688,76 +688,75 @@ let menangB = 0;
 
 // energi
 document.getElementById("energiA").innerHTML =
-((hasil.bahanA.energi / 100) * hasil.beratA).toFixed(1) + " Kkal";
+((hasil.bahanA.energi / 100) * hasil.beratA * (hasil.bahanA.bdd / 100)).toFixed(0) + " Kkal";
 
 document.getElementById("energiB").innerHTML =
-((hasil.bahanB.energi / 100) * hasil.beratB).toFixed(1) + " Kkal";
+((hasil.bahanB.energi / 100) * hasil.beratB * (hasil.bahanB.bdd / 100)).toFixed(0) + " Kkal";
 
 // protein
 document.getElementById("proteinA").innerHTML =
-((hasil.bahanA.protein / 100) * hasil.beratA).toFixed(1) + " g";
+((hasil.bahanA.protein / 100) * hasil.beratA * (hasil.bahanA.bdd / 100)).toFixed(1) + " g";
 
 document.getElementById("proteinB").innerHTML =
-((hasil.bahanB.protein / 100) * hasil.beratB).toFixed(1) + " g";
+((hasil.bahanB.protein / 100) * hasil.beratB * (hasil.bahanB.bdd / 100)).toFixed(1) + " g";
 
 // lemak
 document.getElementById("lemakA").innerHTML =
-((hasil.bahanA.lemak / 100) * hasil.beratA).toFixed(1) + " g";
+((hasil.bahanA.lemak / 100) * hasil.beratA * (hasil.bahanA.bdd / 100)).toFixed(1) + " g";
 
 document.getElementById("lemakB").innerHTML =
-((hasil.bahanB.lemak / 100) * hasil.beratB).toFixed(1) + " g";
+((hasil.bahanB.lemak / 100) * hasil.beratB * (hasil.bahanB.bdd / 100)).toFixed(1) + " g";
 
 // karbo
 document.getElementById("karbohidratA").innerHTML =
-((hasil.bahanA.karbohidrat / 100) * hasil.beratA).toFixed(1) + " g";
+(((hasil.bahanA.karbohidrat / 100) * hasil.beratA) * (hasil.bahanA.bdd / 100)).toFixed(1) + " g";
 
 document.getElementById("karbohidratB").innerHTML =
-((hasil.bahanB.karbohidrat / 100) * hasil.beratB).toFixed(1) + " g";
+(((hasil.bahanB.karbohidrat / 100) * hasil.beratB) * (hasil.bahanB.bdd / 100)).toFixed(1) + " g";
 
 // serat
 document.getElementById("seratA").innerHTML =
-((hasil.bahanA.serat / 100) * hasil.beratA).toFixed(1) + " g";
+(((hasil.bahanA.serat / 100) * hasil.beratA) * (hasil.bahanA.bdd / 100)).toFixed(1) + " g";
 
 document.getElementById("seratB").innerHTML =
-((hasil.bahanB.serat / 100) * hasil.beratB).toFixed(1) + " g";
+(((hasil.bahanB.serat / 100) * hasil.beratB) * (hasil.bahanB.bdd / 100)).toFixed(1) + " g";
 
 document.getElementById("kalsiumA").innerHTML =
-((hasil.bahanA.kalsium / 100) * hasil.beratA).toFixed(1) + " mg";
+(((hasil.bahanA.kalsium / 100) * hasil.beratA) * (hasil.bahanA.bdd / 100)).toFixed(2) + " mg";
 
 
 document.getElementById("kalsiumB").innerHTML =
-((hasil.bahanB.kalsium / 100) * hasil.beratB).toFixed(1) + " mg";
+(((hasil.bahanB.kalsium / 100) * hasil.beratB) * (hasil.bahanB.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("besiA").innerHTML =
-((hasil.bahanA.besi / 100) * hasil.beratA).toFixed(1) + " mg";
-
+(((hasil.bahanA.besi / 100) * hasil.beratA) * (hasil.bahanA.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("besiB").innerHTML =
-((hasil.bahanB.besi / 100) * hasil.beratB).toFixed(1) + " mg";
+(((hasil.bahanB.besi / 100) * hasil.beratB) * (hasil.bahanB.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("natriumA").innerHTML =
-((hasil.bahanA.natrium / 100) * hasil.beratA).toFixed(1) + " mg";
+(((hasil.bahanA.natrium / 100) * hasil.beratA) * (hasil.bahanA.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("natriumB").innerHTML =
-((hasil.bahanB.natrium / 100) * hasil.beratB).toFixed(1) + " mg";
+(((hasil.bahanB.natrium / 100) * hasil.beratB) * (hasil.bahanB.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("kaliumA").innerHTML =
-((hasil.bahanA.kalium / 100) * hasil.beratA).toFixed(1) + " mg";
+(((hasil.bahanA.kalium / 100) * hasil.beratA) * (hasil.bahanA.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("kaliumB").innerHTML =
-((hasil.bahanB.kalium / 100) * hasil.beratB).toFixed(1) + " mg";
+(((hasil.bahanB.kalium / 100) * hasil.beratB) * (hasil.bahanB.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("vitAA").innerHTML =
-((hasil.bahanA.vitA / 100) * hasil.beratA).toFixed(1) + " mg";
+(((hasil.bahanA.vitA / 100) * hasil.beratA) * (hasil.bahanA.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("vitAB").innerHTML =
-((hasil.bahanB.vitA / 100) * hasil.beratB).toFixed(1) + " mg";
+(((hasil.bahanB.vitA / 100) * hasil.beratB) * (hasil.bahanB.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("vitCA").innerHTML =
-((hasil.bahanA.vitC / 100) * hasil.beratA).toFixed(1) + " mg";
+(((hasil.bahanA.vitC / 100) * hasil.beratA) * (hasil.bahanA.bdd / 100)).toFixed(2) + " mg";
 
 document.getElementById("vitCB").innerHTML =
-((hasil.bahanB.vitC / 100) * hasil.beratB).toFixed(1) + " mg";
+(((hasil.bahanB.vitC / 100) * hasil.beratB) * (hasil.bahanB.bdd / 100)).toFixed(2) + " mg";
 
 
 let hargaEnergiA =
@@ -1284,7 +1283,12 @@ function tampilHarga(id, nilai) {
         isFinite(nilai) ? "Rp " + nilai.toFixed(2) : "-";
 }
 
-const rekomendasi = document.getElementById("rekomendasiText");
+const rekomendasi = document.getElementById("rekomendasiPangan");
+console.log("Bahan A:", hasil.bahanA.nama);
+console.log("Bahan B:", hasil.bahanB.nama);
+console.log("Menang A:", menangA);
+console.log("Menang B:", menangB);
+console.log("Elemen rekomendasi:", rekomendasiPangan);
 
 if (menangA > menangB) {
     rekomendasiPangan.innerHTML =

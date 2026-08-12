@@ -175,10 +175,17 @@ function bandingkanLagi(){
 }
 
 
-function lanjutKuis(){
+function konversiBerat(){
 
-    window.location.href = "kuis.html";
+    window.location.href = "konversi-berat.html";
 
+}
+
+function langsungKeKalkulator() {
+    localStorage.setItem("aksesKalkulator", "true");
+    localStorage.setItem("lewatiKuis", "true");
+
+    window.location.href = "index.html";
 }
 
 
@@ -253,6 +260,12 @@ function tutupModal() {
 
 }
 
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    mobileMenu.classList.toggle("hidden");
+}
+
 window.toggleDarkMode = toggleDarkMode;
 
 window.addEventListener("load", function () {
@@ -276,9 +289,25 @@ window.addEventListener("load", function () {
             "hover:bg-blue-600"
         );
 
+        if (localStorage.getItem("lewatiKuis") === "true") {
+        localStorage.removeItem("lewatiKuis");
+    } else {
+        window.location.href = "kuis.html";
+    }
+
         if (pesanAkses) {
             pesanAkses.style.display = "none";
         }
     }
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const tombolKirim = document.getElementById("submitQuiz");
+
+   if (form && tombolKirim) {
+    form.addEventListener("submit", function () {
+        
+    });
+}
+});
 
 });
