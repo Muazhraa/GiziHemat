@@ -18,68 +18,163 @@
 
 <body class="bg-slate-50 text-slate-800">
 
-    <!-- NAVBAR -->
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-5">
+    <!-- Navbar -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
 
-            <div class="h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <!-- Logo -->
-                <a href="index.html" class="flex items-center gap-3">
+        <div class="flex justify-between items-center h-16">
 
-                    <div class="w-11 h-11 rounded-xl bg-blue-600 text-white
-                                flex items-center justify-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 shrink-0">
 
-                        <span class="material-symbols-outlined">
-                            calculate
-                        </span>
+                <div class="p-2 bg-blue-600 rounded-lg text-white">
+                    <span class="material-symbols-outlined block">
+                        analytics
+                    </span>
+                </div>
 
-                    </div>
+                <span class="text-xl font-bold tracking-tight text-slate-900">
+                    GiziHemat
+                </span>
 
-                    <div>
+            </div>
 
-                        <h1 class="font-bold text-lg text-slate-800">
-                            GiziHemat
-                        </h1>
+            <!-- NAVBAR LAPTOP -->
+            <div class="hidden md:flex items-center gap-3">
 
-                        <p class="text-xs text-slate-500">
-                            Pilih bahan pangan dengan lebih mudah
-                        </p>
+                <!-- Beranda -->
+                <a href="index.html"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-blue-50 hover:text-blue-600 transition">
 
-                    </div>
+                    <span class="material-symbols-outlined text-[20px]">
+                        home
+                    </span>
+
+                    <span class="font-medium">
+                        Beranda
+                    </span>
 
                 </a>
 
-                <!-- Menu -->
-                <div class="hidden md:flex items-center gap-7 text-sm">
+                <!-- Kuis -->
+                <a href="kuis.html"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-blue-50 hover:text-blue-600 transition">
 
-                    <a href="index.html"
-                       class="text-slate-600 hover:text-blue-600">
+                    <span class="material-symbols-outlined text-[20px]">
+                        quiz
+                    </span>
 
-                        Beranda
+                    <span class="font-medium">
+                        Kuis
+                    </span>
 
-                    </a>
+                </a>
 
-                    <a href="petunjuk.html"
-                       class="text-slate-600 hover:text-blue-600">
+                <!-- Petunjuk -->
+                <a href="petunjuk.html"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-blue-50 hover:text-blue-600 transition">
 
-                        Petunjuk Penggunaan
+                    <span class="material-symbols-outlined text-[20px]">
+                        menu_book
+                    </span>
 
-                    </a>
+                    <span class="font-medium">
+                        Petunjuk
+                    </span>
 
-                    <a href="konversi-berat.html"
-                       class="font-semibold text-blue-600">
+                </a>
 
+                <!-- Konversi Berat AKTIF -->
+                <a href="konversi-berat.html"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white">
+
+                    <span class="material-symbols-outlined text-[20px]">
+                        scale
+                    </span>
+
+                    <span class="font-medium">
                         Konversi Berat
+                    </span>
 
-                    </a>
+                </a>
 
-                </div>
+            </div>
+
+            <!-- TOMBOL ☰ HP -->
+            <button
+                type="button"
+                onclick="toggleMobileMenu()"
+                class="md:hidden p-2 rounded-lg hover:bg-blue-50">
+
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+
+            </button>
+
+        </div>
+
+        <!-- MENU HP -->
+        <div id="mobileMenu" class="hidden md:hidden pb-4">
+
+            <div class="flex flex-col gap-2 pt-2">
+
+                <!-- Beranda -->
+                <a href="index.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600">
+
+                    <span class="material-symbols-outlined">
+                        home
+                    </span>
+
+                    Beranda
+
+                </a>
+
+                <!-- Kuis -->
+                <a href="kuis.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600">
+
+                    <span class="material-symbols-outlined">
+                        quiz
+                    </span>
+
+                    Kuis
+
+                </a>
+
+                <!-- Petunjuk -->
+                <a href="petunjuk.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 hover:text-blue-600">
+
+                    <span class="material-symbols-outlined">
+                        menu_book
+                    </span>
+
+                    Petunjuk
+
+                </a>
+
+                <!-- Konversi Berat AKTIF -->
+                <a href="konversi-berat.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 text-white">
+
+                    <span class="material-symbols-outlined">
+                        scale
+                    </span>
+
+                    Konversi Berat
+
+                </a>
 
             </div>
 
         </div>
-    </nav>
+
+    </div>
+
+</nav>
 
 
     <!-- HEADER -->
