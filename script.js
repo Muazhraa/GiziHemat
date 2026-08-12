@@ -266,6 +266,14 @@ function toggleMobileMenu() {
     mobileMenu.classList.toggle("hidden");
 }
 
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (mobileMenu) {
+        mobileMenu.classList.toggle("hidden");
+    }
+}
+
 window.toggleDarkMode = toggleDarkMode;
 
 window.addEventListener("load", function () {
