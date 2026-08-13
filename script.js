@@ -240,6 +240,7 @@ function toggleDarkMode(){
     );
 }
 
+
 function cekAkses() {
 
     const akses = localStorage.getItem("aksesKalkulator");
@@ -266,12 +267,15 @@ function toggleMobileMenu() {
     mobileMenu.classList.toggle("hidden");
 }
 
-function toggleMobileMenu() {
-    const mobileMenu = document.getElementById("mobileMenu");
+function toggleDarkMode() {
+    document.documentElement.classList.toggle("dark");
 
-    if (mobileMenu) {
-        mobileMenu.classList.toggle("hidden");
-    }
+    localStorage.setItem(
+        "theme",
+        document.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light"
+    );
 }
 
 window.toggleDarkMode = toggleDarkMode;
